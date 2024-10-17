@@ -5,5 +5,24 @@ repos:
   hooks:
     # Run the linter.
     - id: ruff
+      args: [ '--fix' ]
     # Run the formatter.
     - id: ruff-format
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: 'v4.6.0'
+  hooks:
+  - id: check-case-conflict
+  - id: check-json
+  - id: check-xml
+  - id: check-yaml
+  - id: debug-statements
+  - id: check-added-large-files
+  - id: end-of-file-fixer
+  - id: requirements-txt-fixer
+  - id: trailing-whitespace
+  - id: check-symlinks
+  - id: debug-statements
+- repo: https://github.com/sirosen/check-jsonschema
+  rev: 0.29.2
+  hooks:
+  - id: check-github-actions
