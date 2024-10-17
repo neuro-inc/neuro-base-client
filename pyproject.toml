@@ -1,0 +1,43 @@
+[tool.poetry]
+name = "neuro-base-client"
+version = "24.10.0"
+description = "Common utilities for apolo internal clients"
+authors = ["Andrew Svetlov <andrew.svetlov@gmail.com>"]
+license = "Apache 2"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+aiohttp = "^3.9.0"
+typing-extensions = ">=4.4.0"
+pytest-aiohttp = "^1.0.5"
+pytest-asyncio = "^0.24.0"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+pytest-aiohttp = "^1.0.5"
+pytest-asyncio = "^0.24.0"
+mypy = "^1.12.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.mypy]
+strict = true
+warn_unused_ignores = true
+warn_return_any = true
+warn_redundant_casts = true
+pretty = true
+packages = ["neuro_base_client", "tests"]
+
+
+[tool.ruff.lint]
+select = ["E", "F", "ASYNC", "T10", "UP", "I", "EXE"]
