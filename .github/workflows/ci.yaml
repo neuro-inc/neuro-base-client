@@ -146,6 +146,10 @@ jobs:
     - name: Run unittests
       env:
         COLOR: yes
+        E2E_AUDIENCE: ${{ secrets.E2E_AUDIENCE }}
+        E2E_AUTH0_URL: ${{ secrets.E2E_AUTH0_URL }}
+        E2E_CLIENT_ID: ${{ secrets.E2E_CLIENT_ID }}
+        E2E_CLIENT_SECRET: ${{ secrets.E2E_CLIENT_SECRET }}
       run: |
         poetry run pytest tests/e2e
 
