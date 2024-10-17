@@ -185,7 +185,7 @@ jobs:
         poetry build
     - name: Configure upload token
       run: |
-        poetry config pypi-token.pypy ${TOKEN}
+        poetry config pypi-token.pypi ${TOKEN}
       env:
         TOKEN: ${{ secrets.PYPI_TOKEN }}
     - name: Publish package distributions to PyPI
