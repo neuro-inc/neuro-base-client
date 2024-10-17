@@ -183,6 +183,5 @@ jobs:
     - name: Build
       run: |
         poetry build
-    - name: Upload
-      run: |
-        poetry publish
+    - name: Publish package distributions to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
