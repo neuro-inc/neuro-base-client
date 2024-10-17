@@ -159,7 +159,7 @@ jobs:
 
   deploy:
     name: Deploy
-    needs: e2e
+    needs: all-tests-passed
     runs-on: ubuntu-latest
     environment: release
     permissions:
