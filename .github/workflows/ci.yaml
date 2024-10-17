@@ -54,14 +54,13 @@ jobs:
       run: poetry install --with dev
     - name: Run pre-commit
       run: |
-        poetry run pre-commit --all-files
+        poetry run pre-commit run --all-files
     - name: Run mypy
       run: |
         poetry run mypy
 
   unit:
     name: Unit
-    needs: lint
     strategy:
       matrix:
         python-version: ['3.9', '3.10', '3.11', '3.12']
@@ -107,7 +106,6 @@ jobs:
 
   e2e:
     name: E2E
-    needs: unit
     strategy:
       matrix:
         python-version: ['3.9', '3.10', '3.11', '3.12']
@@ -153,7 +151,7 @@ jobs:
 
   all-tests-passed:
     name: All tests passed
-    needs: [unit, e2e]
+    needs: [lint, unit, e2e]
     runs-on: ubuntu-latest
     steps:
     - run: |
@@ -163,7 +161,10 @@ jobs:
     name: Deploy
     needs: e2e
     runs-on: ubuntu-latest
-    # Run only on pushing a tag
+    environment: release
+    permissions:
+      # IMPORTANT: this permission is mandatory for trusted publishing
+      id-token: write    # Run only on pushing a tag
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
     steps:
     - name: Checkout
