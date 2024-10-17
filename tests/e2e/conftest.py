@@ -1,9 +1,10 @@
 import os
+from collections.abc import AsyncIterator
 from typing import Callable
 
 import pytest
 
-from neuro_base_client import HttpClient
+from apolo_base_client import HttpClient
 
 
 @pytest.fixture
@@ -12,7 +13,7 @@ def srv_port(unused_tcp_port_factory: Callable[[], int]) -> int:
 
 
 @pytest.fixture
-async def client(srv_port: int) -> HttpClient:
+async def client(srv_port: int) -> AsyncIterator[HttpClient]:
     async with HttpClient(
         base_url=f"http://localhost:{srv_port}",
         auth0_url=os.environ["E2E_AUTH0_URL"],

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "neuro-base-client"
+name = "apolo-base-client"
 version = "24.10.0"
 description = "Common utilities for apolo internal clients"
 authors = ["Andrew Svetlov <andrew.svetlov@gmail.com>"]
@@ -19,6 +19,7 @@ pytest = "^8.3.3"
 pytest-aiohttp = "^1.0.5"
 pytest-asyncio = "^0.24.0"
 mypy = "^1.12.0"
+pre-commit = "^4.0.1"
 
 [build-system]
 requires = ["poetry-core"]
@@ -36,7 +37,7 @@ warn_unused_ignores = true
 warn_return_any = true
 warn_redundant_casts = true
 pretty = true
-packages = ["neuro_base_client", "tests"]
+packages = ["apolo_base_client", "tests"]
 
 
 [tool.ruff.lint]

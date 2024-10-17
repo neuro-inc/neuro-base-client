@@ -62,7 +62,7 @@ class HttpClient:
         return self._access_token
 
     @property
-    def expiration_time(self) -> str:
+    def expiration_time(self) -> float:
         return self._expiration_time
 
     def _generate_headers(self) -> CIMultiDict[str]:

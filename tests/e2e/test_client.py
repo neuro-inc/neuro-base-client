@@ -1,13 +1,9 @@
 import asyncio
-from collections.abc import Awaitable
-from typing import Callable
 
 from aiohttp import web
-from aiohttp.test_utils import TestServer as _TestServer
+from aiohttp.pytest_plugin import AiohttpServer
 
-from neuro_base_client import HttpClient
-
-_TestServerFactory = Callable[[web.Application], Awaitable[_TestServer]]
+from apolo_base_client import HttpClient
 
 
 async def test_refresh(client: HttpClient) -> None:
@@ -18,7 +14,7 @@ async def test_refresh(client: HttpClient) -> None:
 
 
 async def test_request_autoinitialize(
-    client: HttpClient, srv_port: int, aiohttp_server: _TestServerFactory
+    client: HttpClient, srv_port: int, aiohttp_server: AiohttpServer
 ) -> None:
     async def hello(request: web.Request) -> web.Response:
         return web.Response(text="hello")
@@ -37,7 +33,7 @@ async def test_request_autoinitialize(
 
 
 async def test_request_check_token(
-    client: HttpClient, srv_port: int, aiohttp_server: _TestServerFactory
+    client: HttpClient, srv_port: int, aiohttp_server: AiohttpServer
 ) -> None:
     async def hello(request: web.Request) -> web.Response:
         assert request.headers["Authorization"] == token

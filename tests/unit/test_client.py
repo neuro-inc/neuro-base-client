@@ -1,19 +1,21 @@
 import asyncio
+from collections.abc import AsyncIterator
 
 import pytest
 
-from neuro_base_client import HttpClient
+from apolo_base_client import HttpClient
 
 
 @pytest.fixture
-async def client() -> HttpClient:
-    return HttpClient(
+async def client() -> AsyncIterator[HttpClient]:
+    async with HttpClient(
         base_url="https://base.url",
         auth0_url="https://auth0.url",
         client_id="client_id",
         audience="<audience>",
         secret="secret",
-    )
+    ) as cl:
+        yield cl
 
 
 async def test_is_not_expired(client: HttpClient) -> None:
